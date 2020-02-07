@@ -1,0 +1,210 @@
+//1.01
+8/29/2018: Started assignment-1.01
+8/29/2018: Added CHANGELOG and README files, dungeon_gen.c, and Makefile
+8/29/2018: Made Makefile
+8/29/2018: Added main function to dungeon_gen.c
+8/29/2018: Added global constant integers DUNGEON_WIDTH and DUNGEON_HEIGHT
+8/29/2018: Added global const int's MIN/MAX _ROOMS, _ROOM_WIDTH and _ROOM_ HEIGHT
+8/29/2018: Added Tile struct
+8/29/2018: Added tile_type enum with Rock, Room, and Corridor
+8/29/2018: Implemented a char array to print the tile's correct char based off its corresponding tile_type
+08/29/2018: Implemented rng seeding
+08/29/2018: Addded Room struct with starting point array, int's width, height, and size
+08/29/2018: Implemented dungeon declaration and initital generation with rocks
+08/29/2018: Implemented printing of the dungeon
+08/29/2018: Implemented algorithm for determining number of rooms randomly
+08/29/2018: Added room_builder function for constructing rooms
+08/29/2018: Implemented room_builder calculations for room dimensions and starting location
+08/29/2018: Changed room_builder to a void function, added a struct Room parameter
+08/29/2018: Reversed room_builder back to struct Room function
+08/29/2018: Changed struct Room variables width and height from constant to not
+08/29/2018: Removed start[2] variable from Room struct - replace with x and y
+08/29/2018: Started fixing calculations for room size and placement
+08/30/2018: Fixed iterator exit value for room placement loops in main()
+08/30/2018: Modified room start point calculations in room_builder()
+08/30/2018: Moved room start point calculations behind width and height to utilize start point coords in width/height determination
+08/30/2018: Removed room start point usage in w/h calc in room_builder()
+08/30/2018: Added limits to width and height rooms could be
+08/30/2018: Added a check for even/odd-ness at the start of room_builder()
+08/30/2018: Relocated room width/height calcs back to beginning of room_builder()
+08/30/2018: Rewrote starting point coord calculations for room_builder() - initial room placement seemingly complete
+09/01/2018: Implemented a loop to place corridor tiles from the rightmost y-value vertical of a room k to the leftmost vertical of room k+1
+09/01/2018: Added vertical corridor placement
+09/01/2018: Added a check to the vertical corridor placement loop to make sure a connecting vertical corridor is added
+09/01/2018: Fixed errors in calculating the end points of vertical corridors
+
+//1.02
+09/09/2018: Started Assignment 1.02
+09/09/2018: Corrected tile placement to include hardness as described
+09/09/2018: Added save_loader.c and save_loader.h
+09/09/2018: Reconfigured Makefile to include save_loader, now outputs to file "rlg"
+09/10/2018: Added main.c to separate main function from dungeon_gen - main function now calls either gen_main in dungeon_gen or the save/loader depending on argument calls
+09/10/2018: Added dungeon_gen.h for dungeon_gen's new role
+09/10/2018: Updated Makefile to account for main.c and dungeon_gen.h
+09/10/2018: Implemented switches for random dungeon generation, generation with a desired seed, --save, --load, and both --save/--load in main.c
+09/11/2018: Rewrote switches in main.c to be more simplified
+09/11/2018: Added a print dungeon function in dungeon_gen.c so it can be called by save_loader
+09/11/2018: Moved enum Tile_Type and struct Tile to dungeon_gen.h
+09/11/2018: Added load_dungeon() and save_dungeon() functions to save_loader.c and .h
+09/11/2018: Added path_set() to save_loader to set proper path to dungeon file location
+09/12/2018: Added enum CHAR_type to dungeon_gen.h
+09/12/2018: Added corresponding enum to print CHAR_type's appropriate character
+09/12/2018: struct Tile given CHAR_type character
+09/12/2018: Moved struct Room to dungeon_gen.h
+09/12/2018: Implemented writing files contents to a dungeon and then printing it in load_dungeon()
+09/12/2018: Removed path_set() from save_loader.c
+09/12/2018: Added 2d tile array parameter to save_dungeon()
+09/12/2018: Added save switch integer parameter to gen_main() and load_dungeon()
+09/12/2018: Rewrote switches in main.c
+09/12/2018: Implemented writing to file for save_dungeon()
+09/12/2018: Added save checks to gen_main() and load_dungeon()
+09/12/2018: Made int room_count a parameter of save_dungeon()
+09/12/2018: Rewrote switches in main.c so [--load --save] and [--save --load] are equivalent
+
+//1.03
+09/15/2018: Begun Assignment 1.03
+09/15/2018: typedef'd struct Tile to tile_t and struct Room to room_t
+09/15/2018: Added struct Dungeon, dungeon_t which contains a 2d array of tiles, an array of rooms, and int values for the room count and the PC coords
+09/15/2018: Changed DUNGEON_WIDTH and DUNGEON_HEIGHT from const int's to #define's
+09/15/2018: Added function construct_dungeon which initializes and returns a dungeon_t struct
+09/15/2018: print_dungeon() in dungeon_gen now takes a dungeon_t as sole parameter
+09/15/2018: save_dungeon() in save_loader no takes a dungeon_t as sole parameter
+09/15/2018: Imported heap.c, heap.h, and macros.h from assignment-1.01 solution
+09/15/2018: Updated Makefile to include new files
+09/16/2018: Changed load_dungeon() and gen_main() from void and int respectively to returning dungeon_t
+09/16/2018: Removed save parameter from both gen_main() and load_dungeon() - print_dungeon() and save_dungeon now called in main
+09/16/2018: Added random PC placement in gen_main()
+09/16/2018: Added path_finder.c and .h - updated Makefile to include both
+09/16/2018: Added struct's path_open and path_tunnel to path_finder.c
+09/16/2018: Added void functions dijkstra_path_open() and dijkstra_path_tunnel() to path_finder.c
+09/16/2018: Added int's pos[2] and cost to struct path_open
+09/16/2018: Completed initializations for Dijkstra's Algorithm in dijkstra_path_open()
+09/16/2018: Added cost updating if statements for each of the 8 possible neighbors
+09/16/2018: Added print_path() to path_finder.c
+09/16/2018: Renamed dijkstra_path_open() to dijkstra_path(), removed dijkstra_path_tunnel()
+09/16/2018: Added int variables to Dijkstra's algorithm in dijkstra_path(), fixed segmentation fault
+09/16/2018: Completed path_cmp() comparator function implementation
+09/16/2018: Added two int parameters - pc_x and pc_y - to print_path(), used to check when to print '@' for the PC
+09/17/2018: Added function weight_calc() to path_finder.c
+09/17/2018: Added path_type enum to path_finder.h (determines whether or not tunneling is taken into account)
+09/17/2018: Added enum path_type parameter to dijkstra_path()
+09/17/2018: Parameter path_type in dijkstra_path() now determines what is added to the heap
+09/17/2018: Implemented weight in dijkstra_path() cost calculation using weight()
+09/17/2018: Fixed an error where only tiles with x=0 and y=0 were given hardness of 255
+
+//1.04
+09/17/2018: Begun Assignment-1.04
+09/17/2018: Added colors.h
+09/17/2018: Added color macros to colors.h
+09/17/2018: Implemented coloring of output in print_dungeon()
+09/27/2018: Added character struct, character_t pointer added to tile variables
+09/27/2018: Updated tile initialization in gen_main and print_dungeon printing for character_t
+09/27/2018: Added --nummon switch to main.c, added int parameter for nummon in gen_main()
+09/27/2018: Added integer attributes array to character_t
+09/27/2018: Added function binary_array to return an array of 0's and 1's for attributes
+09/27/2018: Completed implementation of monster generation and placement
+09/28/2018: Added function run_dungeon to dungeon_gen.c with dungeon_t and heap parameters
+09/28/2018: Added size 2 int array pos, integer turn, and heap_node_t *hn to charcter_t
+09/28/2018: Added function turn_cmp which compares turn costs for use in priority queue
+09/28/2018: Added function character_move() to dungeon_gen.c, determines character move for run_dungeon()
+09/28/2018: Begun implementation of character moves
+09/28/2018: Added is_alive boolean int to character_t
+09/28/2018: Added two integer parameters, pos_x and pos_y, to character_move to return updated character position
+09/29/2018: Added two integer pointer parameters start_x and start_y to dijkstra_path to be used in determining intelligent monster movement
+09/29/2018: Added size 2 array of int p_known to character containing known PC coords
+09/28/2018: Added two more integer params to dijkstra_path to replace PC coords as kept track by the dungeon struct with known PC coords
+09/29/2018: Implemented PC detection when within 3 tiles both dimensions, in the same room, in the same corridor, or in a corridor or room immediately connected to current position
+
+//1.05
+10/06/2018: Begun Assignment-1.05
+10/06/2018: Included ncurses.h in dungeon_gen.c
+10/06/2018: Added update_dungeon() to dungeon_gen.c
+10/06/2018: Implemented printing of dungeon to screen in update_dungeon()
+10/06/2018: Added up and down staircases
+10/06/2018: Implemented random placement of stairs onto dungeon
+10/06/2018: Added char parameter move to character_move in dungeon_gen
+10/06/2018: Added commands.c and commands.h, Makefile updated
+10/06/2018: Added PC_action to commands.c
+10/06/2018: Added end_dungeon() to dungeon_gen
+10/07/2018: Added functionality to end_dungeon to flag the creation of a new dungeon
+10/07/2018: Added dungeon_main() to dungeon_gen, main.c now calls dungeon_main() instead of gen_main()
+10/07/2018: Added character_t * param to gen_main()
+10/07/2018: Implemented movement, rest, exit, and erroneous inputs in PC_action()
+10/07/2018: Added monster_list() to commands.c
+10/07/2018: Added int nummon variable to dungeon_t
+10/08/2018: Moved monster los calculations in character_move() to new function monster_los() in dungeon_gen.c
+10/08/2018: Created function print_monster_list() in commands.c, moved monster info output code to from monster_list()
+10/08/2018: Added function construct_layout() to dungeon_gen.c, moving construction of dungeon_t's tile_t and room_t arrays outside of gen_main()
+10/08/2018: Added dungeon_t cur_dungeon to remember dungeon state at last update, fixes monster move updating before PC turn is over
+
+//1.06
+10/11/2018: Begun Assignment-1.06
+10/11/2018: Changed file extensions from .c to .cpp
+10/11/2018: Removed save_loader.cpp and save_loader.h, saving and loading functionality fully removed
+10/11/2018: Updated Makefile for new files
+10/11/2018: Fixed errors in code from C++ conversion
+10/15/2018: Added character.cpp and character.h
+10/15/2018: Added Character (obj character_t), Character_Player (obj PC_t), and Character_Monster (obj monster_t) classes to character.cpp. Character_Player and Character_Monster are subclasses
+10/15/2018: Implemented functions for getting and modifying character_t variables
+10/15/2018: Removed binary array
+10/15/2018: Completed implementation of PC character move
+10/16/2018: Updated files for change from character struct to object
+10/16/2018: Created tile_t class replacing struct Tile tile_t
+10/16/2018: Added global FOW activation flag and integer boolean seen flag for tile_t
+10/17/2018: Added update to tile_t seen flag for tiles that are or have been in PC sight
+10/17/2018: Updated output to take into account FOW
+10/17/2018: Added command for input 'f' to turn on/off FOW in commands.cpp
+10/17/2018: Added get_FOW() and update_FOW() to dungeon_gen.cpp
+10/17/2018: Added teleport_PC() to commands.cpp
+10/17/2018: Added error output for attempting to move into immutable rock
+10/17/2018: Completed implementation of teleport_PC()
+10/18/2018: Fixed output bug where output came after command, resulting in dungeon having outdated monster placement during PC turn
+10/19/2018: Added PC_move() and monster_move() to dungeon_gen.cpp, taking their respective parts from character_move()
+10/19/2018: Moved turn_cmp() to character.cpp from dungeon_gen.cpp
+10/19/2018: Made structs room_t and dungeon_t with classes
+10/19/2018: Added dungeon.cpp and dungeon.h
+10/19/2018: Moved tile_t, room_t, and dungeon_t classes to dungeon.h/cpp
+10/20/2018: Updated dungeon_t destructor to free dynamically allocated rooms array
+10/20/2018: Changed characters array in gen_main() to a vector of character_t
+
+//1.07
+10/27/2018: Begun Assignment-1.07
+10/27/2018: Added monster_parser.cpp and .h
+10/27/2018: Added monster_template_t to character.h
+10/27/2018: Added monster_parser() to monster_parser.cpp
+10/27/2018: Begun implementation of monster_parser()
+10/28/2018: Added monster_template_t vector to dungeon_main()
+10/28/2018: Implemented monster_template_t :: print_template() to print out template contents
+
+//1.08
+11/03/2018: Begun Assignment-1.08
+11/04/2018: Added dice.h with dice object
+11/04/2018: Added object_parser.cpp and .h
+11/04/2018: Completed equivalent implementation object parsing
+11/04/2018: Implemented monster_factory() and object_factory() in character.cpp
+11/04/2018: Updated update_dungeon() in dungeon_gen.cpp to utilize new color members for characters and objects
+11/04/2018: Monsters are now randomly generated using given desc's
+11/04/2018: Objects are now randomly spawned in the dungeon using given desc's
+11/05/2018: Implemented effects of unique status for both monsters and objects
+11/05/2018: Implemented non-corporeal attribute
+11/05/2018: Implemented item destruction and picking up
+
+//1.09
+11/10/2018: Begun Assignment-1.09
+11/10/2018: Added equipment slots to PC
+11/10/2018: Added wear command
+11/10/2018: Added has_equipment function to PC_t
+11/10/2018: Added equip and dequip functions to PC_t
+11/10/2018: Added get_slot and get_slot_type to PC_t
+11/10/2018: Added take off, drop, and expunge commands
+11/11/2018: Added dequip_update() to PC_t
+11/11/2018: Dequipping and equipping now affect PC stats
+11/11/2018: Added commands for displaying inventory and equipment
+11/11/2018: Implemented displays for inventory and equipment in inventory_list() and equipment_list()
+11/11/2018: Added command for displaying item
+11/11/2018: Implemented item display in display_item()
+11/11/2018: Added command for displaying enemy
+11/11/2018: Added select_character() for selecting a character to display
+11/11/2018: Added display_character() to display a character's information
+11/11/2018: Added combat() to dungeon_gen.cpp to simulate combat
+11/11/2018: Updated run dungeon to appropriately handle combat results
